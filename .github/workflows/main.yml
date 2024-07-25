@@ -1,0 +1,24 @@
+name: Run Colab Notebook
+
+on: [push]
+
+jobs:
+  run-notebook:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9.5'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Execute Notebook
+      run: |
+        jupyter nbconvert --to notebook --execute --inplace ./application_all_years.ipynb
