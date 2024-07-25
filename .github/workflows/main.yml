@@ -22,4 +22,17 @@ jobs:
     - name: Execute Python Script
       run: |
         python application.py
+
+    - name: Configure Git
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+
+    - name: Commit and Push changes
+      run: |
+        git add .
+        git commit -m "Update generated files"
+        git push origin HEAD:${{ github.ref }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
