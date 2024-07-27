@@ -57,7 +57,7 @@ model = {'filename': list_filepath,
           'train_size': len(y),
           'best_boost_iteration': trainer.model.best_iteration_}
 
-dump(model,'./dict_model')
+#dump(model,'./dict_model')
 
 # Exclude recent lags
 excl_weeks = []
