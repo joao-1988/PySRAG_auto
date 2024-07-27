@@ -18,7 +18,13 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
+    - name: Set up Google Application Credentials
+      run: |
+        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > /tmp/credentials.json
+        export GOOGLE_APPLICATION_CREDENTIALS=/tmp/credentials.json
+        
     - name: Execute Python Script
       run: |
         python application.py
