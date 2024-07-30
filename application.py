@@ -94,6 +94,10 @@ X = pd.concat(list_X).reset_index(drop=True)
 y = pd.concat(list_y).reset_index(drop=True)
 df_training_weeks = pd.concat(list_training_weeks).reset_index(drop=True)
 
+os.remove(influd22)
+os.remove(influd23)
+os.remove(influd24)
+
 # Treinar o modelo
 trainer = GBMTrainer(objective='multiclass', eval_metric='multi_logloss')
 trainer.fit(X, y)
