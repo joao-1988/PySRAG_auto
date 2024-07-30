@@ -22,8 +22,8 @@ jobs:
 
     - name: Set up Google Application Credentials
       run: |
-        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > /tmp/credentials.json
-        export GOOGLE_APPLICATION_CREDENTIALS=/tmp/credentials.json
+        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > credentials.json
+        export GOOGLE_APPLICATION_CREDENTIALS=credentials.json
         
     - name: Execute Python Script
       run: |
