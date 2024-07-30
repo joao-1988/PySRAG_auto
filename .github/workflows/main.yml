@@ -1,4 +1,4 @@
-name: Run Colab Notebook
+name: Train model
 
 on: [push]
 
