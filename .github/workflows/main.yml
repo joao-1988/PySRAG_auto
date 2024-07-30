@@ -23,6 +23,13 @@ jobs:
     - name: Set up Google Application Credentials
       run: |
         echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > credentials.json 
+
+    - name: Verify credentials.json
+      run: |
+        echo "Listing contents of the working directory:"
+        ls -l
+        echo "Displaying the first few lines of credentials.json for verification:"
+        head -n 10 credentials.json
         
     - name: Execute Python Script
       run: |
