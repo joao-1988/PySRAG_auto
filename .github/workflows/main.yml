@@ -22,7 +22,7 @@ jobs:
 
     - name: Set up Google Application Credentials
       run: |
-        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" | base64 --decode | jq '.' > credentials.json 
+        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" | jq '.' > credentials.json 
         
     - name: Execute Python Script
       run: |
