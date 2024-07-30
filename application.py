@@ -33,7 +33,7 @@ def get_latest_data(all_files,string_year):
   return string_latest_data
 
 # Configurar o caminho para as credenciais
-creds_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+creds_path = '/tmp/credentials.json'
 creds = service_account.Credentials.from_service_account_file(creds_path)
 drive_service = build('drive', 'v3', credentials=creds)
 
