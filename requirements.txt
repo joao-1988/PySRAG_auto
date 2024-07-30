@@ -11,3 +11,5 @@ tzdata==2024.1
 joblib==1.4.2
 threadpoolctl==3.5.0
 six==1.16.0
+google-api-python-client==2.138.0
+google-auth==2.32.0
