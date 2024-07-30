@@ -11,6 +11,33 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaIoBaseDownload
 from datetime import datetime
 
+# Função para baixar um arquivo
+def download_file(file_id, filepath, service):
+    try:
+        request = service.files().get_media(fileId=file_id)
+        with open(filepath, "wb") as f:
+            downloader = MediaIoBaseDownload(f, request)
+            done = False
+            while done is False:
+                status, done = downloader.next_chunk()
+                print(f"Download {int(status.progress() * 100)}%.")
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+
+# Obter a data mais recente de cada ano
+def get_latest_data(all_files,string_year):
+  format_string = '%d-%m-%Y'
+  list_files = [i.replace(f'{string_year}-','').split('.')[0] for i in all_files if i[:8] == string_year]
+  latest_data = max(list_files,key=lambda x: datetime.strptime(x, format_string))
+  string_latest_data = string_year+'-'+latest_data+'.csv'
+  return string_latest_data
+
+# Configurar o caminho para as credenciais
+creds_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+creds = service_account.Credentials.from_service_account_file(creds_path)
+drive_service = build('drive', 'v3', credentials=creds)
+
+
 # Treinando com mais de 1 arquivo (2 anos ou mais)
 
 path='./../bases'
