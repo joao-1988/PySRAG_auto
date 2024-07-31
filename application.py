@@ -33,9 +33,9 @@ def get_latest_data(all_files,string_year):
   return string_latest_data
 
 # Configurar o caminho para as credenciais
-creds_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS_JSON')
+#creds_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS_JSON')
 #creds_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-#creds_path = 'credentials.json'
+creds_path = 'credentials.json'
 creds = service_account.Credentials.from_service_account_file(creds_path)
 drive_service = build('drive', 'v3', credentials=creds)
 
@@ -96,6 +96,7 @@ df_training_weeks = pd.concat(list_training_weeks).reset_index(drop=True)
 os.remove(influd22)
 os.remove(influd23)
 os.remove(influd24)
+os.remove(creds_path)
 
 # Treinar o modelo
 trainer = GBMTrainer(objective='multiclass', eval_metric='multi_logloss')
