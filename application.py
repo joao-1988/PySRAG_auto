@@ -11,6 +11,9 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaIoBaseDownload
 from datetime import datetime
 
+import base64
+import json
+
 # Função para baixar um arquivo
 def download_file(file_id, filepath, service):
     try:
@@ -34,9 +37,10 @@ def get_latest_data(all_files,string_year):
 
 # Configurar o caminho para as credenciais
 creds_path = os.getenv('GITHUB_TOKEN')
+creds_json = json.loads(base64.b64decode(creds_path).decode('utf-8'))
 #creds_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 #creds_path = 'credentials.json'
-creds = service_account.Credentials.from_service_account_file(creds_path)
+creds = service_account.Credentials.from_service_account_file(creds_json)
 drive_service = build('drive', 'v3', credentials=creds)
 
 # Listar arquivos csv 
