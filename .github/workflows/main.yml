@@ -22,8 +22,9 @@ jobs:
 
     - name: Set up Google Application Credentials
       run: |
-        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > credentials.json 
-
+        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > credentials_raw.json
+        sed 's/\\n/\n/g' credentials_raw.json > credentials.json
+        
     - name: Verify credentials.json
       run: |
         echo "Listing contents of the working directory:"
