@@ -21,8 +21,6 @@ jobs:
         pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
     - name: Set up Google Application Credentials
-      env:
-        GITHUB_TOKEN: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
       run: |
         echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > credentials_raw.json
         sed 's/\\n/\n/g' credentials_raw.json > credentials.json
@@ -35,6 +33,8 @@ jobs:
         head -n 10 credentials.json
         
     - name: Execute Python Script
+      env:
+        GITHUB_TOKEN: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}    
       run: |
         python application.py
 
