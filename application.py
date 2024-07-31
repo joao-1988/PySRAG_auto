@@ -36,11 +36,8 @@ def get_latest_data(all_files,string_year):
   return string_latest_data
 
 # Configurar o caminho para as credenciais
-creds_path = os.getenv('GITHUB_TOKEN')
-creds_json = json.loads(base64.b64decode(creds_path).decode('utf-8'))
-print(creds_json)
-#creds_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-#creds_path = 'credentials.json'
+creds_env = os.getenv('GITHUB_TOKEN')
+creds_json = json.loads(base64.b64decode(creds_env).decode('utf-8'))
 creds = service_account.Credentials.from_service_account_info(creds_json)
 drive_service = build('drive', 'v3', credentials=creds)
 
@@ -101,7 +98,6 @@ df_training_weeks = pd.concat(list_training_weeks).reset_index(drop=True)
 os.remove(influd22)
 os.remove(influd23)
 os.remove(influd24)
-os.remove(creds_path)
 
 # Treinar o modelo
 trainer = GBMTrainer(objective='multiclass', eval_metric='multi_logloss')
