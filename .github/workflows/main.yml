@@ -22,8 +22,7 @@ jobs:
 
     - name: Set up Google Application Credentials
       run: |
-        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > credentials_raw.json
-        sed 's/\\n/\n/g' credentials_raw.json > credentials.json
+        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" | base64 --decode > credentials_raw.json
         
     - name: Verify credentials.json
       run: |
