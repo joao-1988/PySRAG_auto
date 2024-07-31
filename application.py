@@ -37,7 +37,7 @@ def get_latest_data(all_files,string_year):
 
 # Configurar o caminho para as credenciais
 creds_path = os.getenv('GITHUB_TOKEN')
-creds_json = json.loads(base64.b64decode(creds_path).decode('utf-8'))
+creds_json = base64.b64decode(creds_path)
 #creds_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 #creds_path = 'credentials.json'
 creds = service_account.Credentials.from_service_account_file(creds_json)
