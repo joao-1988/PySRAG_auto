@@ -2,7 +2,7 @@ name: Weekly model training
 
 on:
   schedule:
-    - cron: "0 24 * * 3" # Runs at 11:00 PM (UTC) every Tuesday
+    - cron: "0 3 * * 3" # Runs at 11:00 PM (UTC) every Tuesday
 
   workflow_dispatch:
 
