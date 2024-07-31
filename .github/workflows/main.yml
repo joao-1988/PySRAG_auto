@@ -20,16 +20,6 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
-    - name: Set up Google Application Credentials
-      run: |
-        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" | base64 --decode > credentials_raw.json
-        
-    - name: Verify credentials.json
-      run: |
-        echo "Listing contents of the working directory:"
-        ls -l
-        echo "Displaying the first few lines of credentials.json for verification:"
-        head -n 10 credentials.json
         
     - name: Execute Python Script
       env:
