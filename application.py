@@ -133,3 +133,4 @@ pd.Series(feature_name,name='feature_name').to_csv('./feature_name.csv',index=Fa
 classes = model['virus']
 pd.Series(classes,name='virus').to_csv('./classes.csv',index=False)
 model['model'].model.booster_.save_model('./booster.txt')
+pd.Series(list_filepath,name='filename').to_csv('./filename.csv',index=False)
