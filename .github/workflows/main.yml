@@ -24,6 +24,11 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
+    - name: Run upload SRAG data to Google Drive
+      env:
+        GITHUB_TOKEN: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+      run: |
+        python upload_srag_data.py
         
     - name: Execute Python Script
       env:
