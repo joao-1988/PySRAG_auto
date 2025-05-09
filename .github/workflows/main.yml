@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+        pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib wget
 
     - name: Run upload SRAG data to Google Drive
       env:
