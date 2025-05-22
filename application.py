@@ -68,7 +68,6 @@ cols_X = ['REGIAO_LATITUDE', 'REGIAO_LONGITUDE', 'UF_LATITUDE'
 col_y = ['POS_SARS2', 'POS_FLUA', 'POS_FLUB', 'POS_VSR',
          'POS_PARA1', 'POS_PARA2', 'POS_PARA3', 'POS_PARA4',
          'POS_ADENO', 'POS_METAP', 'POS_BOCA', 'POS_RINO', 'POS_OUTROS']
-demais_virus = ''
 
 list_filepath = [influd22, influd23, influd24]
 
@@ -80,8 +79,8 @@ list_training_weeks = []
 
 for filepath in list_filepath:
   print(filepath)
-  srag = SRAG(filepath,old_filter=True)
-  X_aux, y_aux = srag.generate_training_data(None, 'multiclass', cols_X, col_y, demais_virus)
+  srag = SRAG(filepath)
+  X_aux, y_aux = srag.generate_training_data('multiclass', cols_X, col_y)
   list_X.append(X_aux)
   list_y.append(y_aux)
   list_training_weeks.append(srag.generate_training_weeks())
@@ -111,7 +110,7 @@ model = {'filename': list_filepath,
           'df_training_weeks': df_training_weeks,
           'model': trainer,
           'train_size': len(y),
-          'best_boost_iteration': trainer.model.best_iteration_}
+          'best_boost_iteration': trainer.best_iteration}
 
 dump(model,'./dict_model')
 
