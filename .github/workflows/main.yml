@@ -32,7 +32,7 @@ jobs:
         
     - name: Execute Python Script
       env:
-        GITHUB_TOKEN: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}    
+        GOOGLE_CREDS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}    
       run: |
         python application.py
 
@@ -40,11 +40,18 @@ jobs:
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
-
+    
     - name: Commit and Push changes
       run: |
         git add .
-        git commit -m "Update generated files"
-        git push origin HEAD:${{ github.ref }}
+        # Verifica se há alterações preparadas para o commit
+        if git diff --staged --quiet; then
+          echo "Nenhuma alteração para commitar. A árvore de trabalho está limpa."
+        else
+          echo "Novas alterações detectadas. Realizando commit e push..."
+          git commit -m "Update generated files"
+          git push origin HEAD:${{ github.ref }}
+        fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
