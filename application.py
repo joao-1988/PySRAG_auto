@@ -37,9 +37,8 @@ def get_latest_data(all_files,string_year):
   string_latest_data = string_year+'-'+latest_data+'.csv'
   return string_latest_data
 
-
 # Configurar o caminho para as credenciais
-creds_env = os.getenv('GITHUB_TOKEN')
+creds_env = os.getenv('GOOGLE_CREDS')
 creds_json = json.loads(base64.b64decode(creds_env).decode('utf-8'))
 creds = service_account.Credentials.from_service_account_info(creds_json)
 drive_service = build('drive', 'v3', credentials=creds)
@@ -71,7 +70,6 @@ if set(files_saved) != set(filepath):
         else:
             print(f"Warning: Arquivo '{influd}' não encontrado.")
 
-    
     # Carregar os dados
     cols_X = ['REGIAO_LATITUDE', 'REGIAO_LONGITUDE', 'UF_LATITUDE'
             , 'UF_LONGITUDE', 'LATITUDE', 'LONGITUDE', 'POPULACAO', 'IDADE_ANO'
