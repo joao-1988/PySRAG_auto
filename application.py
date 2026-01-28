@@ -54,7 +54,8 @@ today = datetime.now().date()
 for year in range(2022, today.year + 1):
     influd = get_latest_data(all_files,'INFLUD'+str(year)[2:])
     print(influd)
-    filepath.append(influd)
+    if influd:
+        filepath.append(influd)
 
 files_saved = pd.read_csv('https://raw.githubusercontent.com/joao-1988/PySRAG_auto/refs/heads/main/filename.csv').filename.to_list()
 
@@ -125,3 +126,4 @@ if set(files_saved) != set(filepath):
     pd.Series(classes,name='virus').to_csv('./classes.csv',index=False)
     model['model'].model.booster_.save_model('./booster.txt')
     pd.Series(filepath,name='filename').to_csv('./filename.csv',index=False)
+
